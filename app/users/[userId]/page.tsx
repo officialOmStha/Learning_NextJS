@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import React from "react";
 
 const fetchUser = async (id: string) => {
@@ -12,6 +13,10 @@ const fetchUser = async (id: string) => {
 const UserPage = async ({params}: {params: Promise<{ userId: string }>; }) => {
   const { userId } = await params;
   const user = await fetchUser(userId)
+
+  if (!user){
+    notFound();
+  }
   return (
     <>
       <div>
